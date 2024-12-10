@@ -25,9 +25,34 @@ Route::post("login", [AuthController::class, "login"])->middleware("web");
 // App
 Route::middleware("web")->group(function () {
     Route::get("checklist", [ChecklistController::class, "index"]);
-    Route::post("checklist/add", [ChecklistController::class, "addChecklist"]);
+    Route::post("checklist/", [ChecklistController::class, "addChecklist"]);
     Route::delete("checklist/{id}", [
         ChecklistController::class,
         "rmChecklist",
+    ]);
+    // detail
+    Route::get("/checklist/{checklistId}/item", [
+        ChecklistController::class,
+        "getAllItems",
+    ]);
+    Route::post("/checklist/{checklistId}/item", [
+        ChecklistController::class,
+        "createItem",
+    ]);
+    Route::get("/checklist/{checklistId}/item/{itemId}", [
+        ChecklistController::class,
+        "getItem",
+    ]);
+    Route::put("/checklist/{checklistId}/item/{itemId}", [
+        ChecklistController::class,
+        "updateStatus",
+    ]);
+    Route::delete("/checklist/{checklistId}/item/{itemId}", [
+        ChecklistController::class,
+        "deleteItem",
+    ]);
+    Route::put("/checklist/{checklistId}/item/rename/{itemId}", [
+        ChecklistController::class,
+        "renameItem",
     ]);
 });
